@@ -1,0 +1,309 @@
+/* ============================================================
+   Sunburst Calculator — style.css
+   Premium yellow aesthetic. Glassmorphism + soft glow + animations.
+   ============================================================ */
+
+/* ---------- CSS Variables (easy customization) ---------- */
+:root {
+  --pastel-yellow:    #fff6c2;
+  --lemon-yellow:     #fff35c;
+  --golden-yellow:    #ffc83d;
+  --sunflower-yellow: #ffb700;
+  --amber-yellow:     #ff9f1c;
+  --mustard-yellow:   #d99a00;
+  --cream-white:      #fffaf0;
+  --soft-beige:       #f6efd9;
+  --ink:              #2a2410;
+  --ink-soft:         #5a4b1f;
+
+  --glass-bg:    rgba(255, 255, 255, 0.35);
+  --glass-brd:   rgba(255, 255, 255, 0.55);
+  --glass-shadow: 0 20px 60px rgba(200, 140, 0, 0.25),
+                  0 4px 14px rgba(120, 80, 0, 0.12);
+
+  --grad-bg: linear-gradient(135deg, #fff6c2 0%, #ffd96a 45%, #ffb347 100%);
+  --grad-primary: linear-gradient(135deg, #ffd54a, #ff9f1c);
+  --grad-equals:  linear-gradient(135deg, #ffb700, #ff7a00);
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 14px;
+
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Poppins", "Outfit", "Montserrat", sans-serif;
+  color: var(--ink);
+  background: var(--grad-bg);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ---------- Animated background blobs ---------- */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  z-index: 0;
+  pointer-events: none;
+  animation: float 14s ease-in-out infinite;
+}
+.blob-1 {
+  width: 420px; height: 420px;
+  background: var(--lemon-yellow);
+  top: -120px; left: -120px;
+}
+.blob-2 {
+  width: 360px; height: 360px;
+  background: var(--amber-yellow);
+  bottom: -100px; right: -100px;
+  animation-delay: -5s;
+}
+.blob-3 {
+  width: 280px; height: 280px;
+  background: var(--golden-yellow);
+  top: 50%; left: 60%;
+  animation-delay: -9s;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(30px, -40px) scale(1.08); }
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 36px 20px 12px;
+  animation: fadeDown 0.8s ease both;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-brd);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--ink-soft);
+  box-shadow: 0 6px 18px rgba(180, 120, 0, 0.15);
+}
+.logo-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--grad-equals);
+  box-shadow: 0 0 12px var(--sunflower-yellow);
+}
+.header-title {
+  margin-top: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #6b4a00, #ff9f1c);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+.header-subtitle {
+  margin-top: 8px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  opacity: 0.85;
+}
+
+/* ---------- Main ---------- */
+.main {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+/* ---------- Calculator card (Glassmorphism) ---------- */
+.calculator {
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid var(--glass-brd);
+  box-shadow: var(--glass-shadow);
+  animation: popIn 0.7s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+@keyframes popIn {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes fadeDown {
+  0%   { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0);     }
+}
+
+/* ---------- Display ---------- */
+.display {
+  background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,235,160,0.4));
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  margin-bottom: 20px;
+  min-height: 130px;
+  text-align: right;
+  box-shadow: inset 0 2px 8px rgba(255,255,255,0.6),
+              inset 0 -2px 8px rgba(180,120,0,0.08);
+  overflow: hidden;
+}
+.display-expression {
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  opacity: 0.7;
+  min-height: 1.4em;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.display-result {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  color: var(--ink);
+  margin-top: 6px;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  transition: transform var(--transition);
+}
+.display-result.flash { transform: scale(1.06); }
+
+/* ---------- Buttons grid ---------- */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.btn {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--ink);
+  height: 64px;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: linear-gradient(145deg, #fffdf2, #fff1bf);
+  box-shadow: 0 6px 14px rgba(180, 130, 0, 0.18),
+              inset 0 1px 0 rgba(255,255,255,0.9);
+  transition: transform var(--transition),
+              box-shadow var(--transition),
+              background var(--transition);
+  user-select: none;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(220, 150, 0, 0.28),
+              0 0 0 3px rgba(255, 200, 60, 0.25);
+}
+.btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 4px 10px rgba(180, 120, 0, 0.18);
+}
+
+/* Operator buttons */
+.btn-operator {
+  background: var(--grad-primary);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(120, 70, 0, 0.25);
+}
+.btn-operator:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 10px 24px rgba(255, 159, 28, 0.45),
+              0 0 0 3px rgba(255, 183, 0, 0.3);
+}
+
+/* AC / DEL */
+.btn-action {
+  background: linear-gradient(145deg, #fff7d4, #ffe488);
+  color: var(--mustard-yellow);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Equals (spans two rows) */
+.btn-equals {
+  background: var(--grad-equals);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  grid-row: span 1;
+  box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45),
+              inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn-equals:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 12px 28px rgba(255, 122, 0, 0.55),
+              0 0 0 3px rgba(255, 159, 28, 0.35);
+}
+
+/* Zero spans two columns */
+.btn-zero { grid-column: span 2; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  opacity: 0.85;
+}
+
+/* ---------- Custom scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--soft-beige); }
+::-webkit-scrollbar-thumb {
+  background: var(--grad-primary);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--grad-equals); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .calculator { padding: 18px; border-radius: 22px; }
+  .btn        { height: 58px; font-size: 1.1rem; }
+  .buttons    { gap: 10px; }
+  .display    { padding: 18px 16px; min-height: 110px; }
+  .header-title { font-size: 2rem; }
+}
+@media (min-width: 768px) {
+  .calculator { max-width: 420px; padding: 28px; }
+  .btn        { height: 70px; font-size: 1.35rem; }
+}
